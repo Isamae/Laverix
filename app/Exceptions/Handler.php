@@ -3,7 +3,8 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Throwable;
+use Illuminate\Auth\AuthenticationException;
+use Auth;
 
 class Handler extends ExceptionHandler
 {
@@ -27,15 +28,21 @@ class Handler extends ExceptionHandler
         'password_confirmation',
     ];
 
-    /**
-     * Register the exception handling callbacks for the application.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        $this->reportable(function (Throwable $e) {
-            //
-        });
-    }
+
+     /*Redireccionamiento cuando se quiere acceder a una pagina y no esta logueado o el logueo sale mal*/
+     protected function unauthenticated($request, AuthenticationException $exception)
+     {
+         if ($request->expectsJson()) {
+             return response()->json(['error' => 'Unauthenticated.'], 401);
+         }
+         if ($request->is('login')) {
+             
+             return redirect()->guest('/');
+         }
+         if ($request->is('administrador') || $request->is('administrador/*')) {
+             
+             return redirect()->guest('/login/administrador');
+         }
+         return redirect()->guest('/');
+     }
 }

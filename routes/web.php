@@ -1,8 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
-/*
+/* 
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
@@ -19,16 +18,26 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/login/administrador', 'App\Http\Controllers\LoginController@showAdminLoginForm');
 
-Auth::routes();
+Route::post('/login/administrador', 'App\Http\Controllers\LoginController@adminLogin');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Auth::routes();
+Route::group(['middleware' => 'auth:usuario'], function () {
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::view('/administrador', 'admin',['tipoLogin' => 'administrador'])->name('administrador');
 
-Auth::routes();
+    Route::get('usuario/create', 'App\Http\Controllers\UsuarioController@create');
+    Route::get('usuario/show-usuarios', 'App\Http\Controllers\UsuarioController@index');
+    Route::get('usuario/show/{id}', 'App\Http\Controllers\UsuarioController@show');
+    Route::get('usuario/edit/{id}', 'App\Http\Controllers\UsuarioController@edit');
+    Route::get('usuario/update', 'App\Http\Controllers\UsuarioController@update');
+    Route::get('usuario/short-usuarios', 'App\Http\Controllers\UsuarioController@indexFiltering');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::post('usuario/strore', 'App\Http\Controllers\UsuarioController@store');
+    Route::post('usuario/destroy/{id}', 'App\Http\Controllers\UsuarioController@destroy');
+    
+    
+});
+
+Route::get('logout', 'App\Http\Controllers\LoginController@logout');

@@ -79,7 +79,7 @@ npm install alpinejs
 npm install jquery-ui --save-dev
 
 # MIGRACIONES
-php artisan make:migration create_users_table  "" comando para migraciones""
+php artisan make:migration create_users_table  " comando para migraciones"
 
 # SEEDERS
 php artisan make:seeder name "Crear Seders"
@@ -101,3 +101,8 @@ php artisan db:seed  /*ejecución insertado de datos */
 
 npm install "para build"   -> inicializarlo
 npm run dev "para compilar"
+
+# Limpiara cache
+php artisan cache:clear
+php artisan config:clear
+php artisan config:cache
