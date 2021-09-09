@@ -13,7 +13,20 @@ class Usuario extends Migration
      */
     public function up()
     {
-        //
+        //Shema Usuario
+        Schema::create('usuarios', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('email')->unique()->nullable();
+            $table->string('nombre')->nullable();
+            $table->string('apellido')->nullable() ;
+            $table->string('password')->nullable();
+            $table->string('telefono',10);
+            $table->date('fechaNacimiento')->nullable();
+            $table->string('direccion');
+            $table->enum('rol', ['Administrador', 'Usuario','Invitado']);
+            $table->rememberToken();
+            $table->timestamps();
+        });
     }
 
     /**
