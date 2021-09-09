@@ -64,17 +64,40 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
 
-#CREAR APLICACIÓN
+# CREAR APLICACIÓN
 composer create-project --prefer-dist laravel/laravel Laverix
 
-#GENERANDO AGREGANDO BOOTSTRAP 4
+# GENERANDO AGREGANDO BOOTSTRAP 4
 composer require laravel/ui
 php artisan ui bootstrap --auth 
 
-#INSTALANDO ALPINE
+# INSTALANDO ALPINE
 npm install  ("verificando instalación")
 npm install alpinejs
 
-#INSTALANDO JQUERY
+# INSTALANDO JQUERY
 npm install jquery-ui --save-dev
 
+# MIGRACIONES
+php artisan make:migration create_users_table  "" comando para migraciones""
+
+# SEEDERS
+php artisan make:seeder name "Crear Seders"
+php artisan migrate:refresh --seed  -> ejecución actualización
+
+# Generar Controller 
+php artisan make:controller nombre-controlador
+composer dump-autoload   /*Para actulizar routes*/
+
+# Ejecución MIGRACIONES y MIGRACIONES
+
+MIGRACIONES
+php artisan migrate  /* Para correr la migraciones*/
+
+MIGRACIONES
+php artisan db:seed  /*ejecución insertado de datos */
+
+# RUN AND UPDATE
+
+npm install "para build"   -> inicializarlo
+npm run dev "para compilar"
