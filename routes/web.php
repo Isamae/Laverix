@@ -19,13 +19,14 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/login/administrador', 'App\Http\Controllers\LoginController@showAdminLoginForm');
+Route::get('logout', 'App\Http\Controllers\LoginController@logout');
 
 Route::post('/login/administrador', 'App\Http\Controllers\LoginController@adminLogin');
 
 
 Route::group(['middleware' => 'auth:usuario'], function () {
 
-    Route::view('/administrador', 'admin',['tipoLogin' => 'administrador'])->name('administrador');
+    Route::view('/administrador', 'administrador',['tipoLogin' => 'administrador'])->name('administrador');
 
     Route::get('usuario/create', 'App\Http\Controllers\UsuarioController@create');
     Route::get('usuario/show-usuarios', 'App\Http\Controllers\UsuarioController@index');
@@ -40,4 +41,3 @@ Route::group(['middleware' => 'auth:usuario'], function () {
     
 });
 
-Route::get('logout', 'App\Http\Controllers\LoginController@logout');

@@ -48,7 +48,7 @@ class LoginController extends Controller
         
         if (Auth::guard('usuario')->attempt(['email' => $request->email, 'password' => $request->password])) {
             
-            $admin = Administrador::where('email', $request->email)->first();
+            $admin = Usuario::where('email', $request->email)->first();
             session()->put('tipoLogin', 'administrador');
             session()->put('admin', $admin);
             return redirect()->intended('/administrador');
