@@ -89,7 +89,7 @@ php artisan migrate:refresh --seed  -> ejecución actualización
 php artisan make:controller nombre-controlador
 composer dump-autoload   /*Para actulizar routes*/
 
-# Ejecución MIGRACIONES y MIGRACIONES
+# Ejecución de MIGRACIONES y MIGRACIONES
 
 MIGRACIONES
 php artisan migrate  /* Para correr la migraciones*/
@@ -101,8 +101,24 @@ php artisan db:seed  /*ejecución insertado de datos */
 
 npm install "para build"   -> inicializarlo
 npm run dev "para compilar"
-
+php artisan serve
 # Limpiara cache
 php artisan cache:clear
 php artisan config:clear
 php artisan config:cache
+
+# RUN PROYECTO
+/*Observación verificar la base destino*/
+Pasos:
+npm install "para build"   -> inicializarlo
+php artisan migrate
+php artisan db:seed
+php artisan serve
+
+
+# OBSERVACIÓN 
+No se implemento el cambio de contraseña
+No se termino la funcionalidad de filtrado de datos y ordenamiento
+Se agrego un campo unico  llamano email para un mejor identificación de usuarios
+Se agrego un usuario por defecto: email: diego@gmail.com , password: 123456789A 
+
