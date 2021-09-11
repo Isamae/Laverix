@@ -36,13 +36,11 @@
                                 <select name="filter" id="filter" class="  form-control" required>
                                     <option value="">Select filtro</option>
                                     <option value="nombre">Nombre</option>
-                                    <option value="email">Nombre</option>
+                                    <option value="email">Email</option>
                                     <option value="celular">Celular</option>
                                     <option value="cedula">Cedula</option>
                                 </select>
-                                <input id="valor" type="valor" name="valor" placeholder="Valor" required>
-
-
+                                <input type="text" class="form-control " id="filter_value" name="filter_value" placeholder="Valor" value="" required>
                             </div>
                             <div class="form-group">
                                 <label for="filter_cantidad" class=" ">Numero Paginas</label>

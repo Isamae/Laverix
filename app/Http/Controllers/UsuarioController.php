@@ -12,7 +12,7 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        $usuarios = Usuario::paginate(10);
+        $usuarios = Usuario::where('email', '!=', session()->get('admin')->email)->paginate(10);
 
         return view('usuario/show-usuarios', compact('usuarios'))->with('i', (request()->input('page', 1) - 1) * $usuarios->perPage());
     }
@@ -52,18 +52,18 @@ class UsuarioController extends Controller
      */
     public function indexFiltering(Request $request)
     {
-        $filter = $request->filter;
-        $value = $request->value;
-        $numero_paginas = $request->filter_cantidad;
+        if($request->filter!=null && $request->filter_value!=null && $request->filter_cantidad!=null) {
 
-        if (!empty($filter)) {
-            $usuarios = Usuario::sortable()
-                ->where("usuario.$filter", 'like', '%'.$value.'%')
-                ->paginate($numero_paginas);
+            $usuarios = Usuario::orderBy($request->filter)
+                                ->where($request->filter, '=', $request->filter_value)
+                                ->paginate($request->filter_cantidad);
+
             return view('usuario/show-usuarios', compact('usuarios'))->with('i', (request()->input('page', 1) - 1) * $usuarios->perPage());
-        } else {
-            $usuarios = Usuario::sortable()
-                ->paginate(10);
+        }
+        else{
+
+            $usuarios = Usuario::where('email', '!=', session()->get('admin')->email)
+                                ->paginate(10);
 
             return view('usuario/show-usuarios', compact('usuarios'))->with('i', (request()->input('page', 1) - 1) * $usuarios->perPage());
         }
